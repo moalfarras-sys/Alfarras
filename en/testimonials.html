@@ -1,0 +1,46 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Testimonials + Micro‑Blog</title><link rel="icon" href="../favicon.ico">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<link rel="manifest" href="../manifest.webmanifest"><meta name="theme-color" content="#0ea5e9"><link rel="apple-touch-icon" href="../icons/icon-192.png">
+<meta name="description" content="Leave a quick 1–5 star review — plus short helpful posts."><meta property="og:title" content="Mohammad Alfarras"><meta property="og:description" content="Leave a quick 1–5 star review — plus short helpful posts."><meta property="og:image" content="../logo.jpeg">
+</head><body>
+<canvas id="aurora"></canvas><canvas id="stars"></canvas><canvas id="trail"></canvas>
+<header class="glass"><div class="container navbar">
+<a class="brand" href="index.html"><img src="../logo.jpeg" alt="logo"><b>Mohammad Alfarras</b></a>
+<div class="actions"><button id="lang" class="icon-btn">🌐</button><button id="dark" class="icon-btn">🌙</button></div>
+</div></header>
+<section class="section"><div class="container">
+  <div class="glass media-card reveal">
+    <h1 class="words">Testimonials + Micro‑Blog</h1>
+    <p class="lead words">Leave a quick 1–5 star review — plus short helpful posts.</p>
+    <form id="guest-form" class="form" onsubmit="submitGuest(event)">
+      <input class="input" name="name" placeholder="الاسم / Name" required>
+      <select class="input" name="rate">
+        <option value="5">★★★★★ — 5</option>
+        <option value="4">★★★★☆ — 4</option>
+        <option value="3">★★★☆☆ — 3</option>
+        <option value="2">★★☆☆☆ — 2</option>
+        <option value="1">★☆☆☆☆ — 1</option>
+      </select>
+      <textarea class="input" name="msg" rows="3" placeholder="اكتب رأيك باختصار..." required></textarea>
+      <button class="btn">إرسال</button>
+    </form>
+  </div>
+  <div id="guest-list" class="cards-guest"></div>
+
+<div class="glass media-card reveal" style="margin-top:12px">
+  <h2 class="words">✍️ Micro‑Blog</h2>
+  <div class="cards">
+    <div class="glass media-card"><b>How to pick earbuds?</b><p class="lead" style="margin-top:6px">Comfort first, battery second — features later.</p></div>
+    <div class="glass media-card"><b>Stable IPTV</b><p class="lead" style="margin-top:6px">Reliable source + quick support = smooth streaming.</p></div>
+  </div>
+</div>
+</div></section>
+<footer class="glass"><div class="container">صُمم بكل حب ❤️ — محمد الفراس — © <span id="year"></span>
+<div class="lang-switch" style="margin-top:8px"><a href="../ar/index.html">AR</a><a href="../en/index.html">EN</a><a href="../de/index.html">DE</a></div>
+</div></footer>
+<a href="https://wa.me/004917623419358" class="chat-fab" aria-label="WhatsApp">💬</a>
+<script src="../app.js"></script>
+</body></html>

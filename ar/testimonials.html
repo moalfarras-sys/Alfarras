@@ -1,0 +1,46 @@
+<!doctype html><html lang="ar" dir="rtl"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>آراء الزوار + مدونتي</title><link rel="icon" href="../favicon.ico">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<link rel="manifest" href="../manifest.webmanifest"><meta name="theme-color" content="#0ea5e9"><link rel="apple-touch-icon" href="../icons/icon-192.png">
+<meta name="description" content="شارك رأيك (1–5 نجوم) — وتصفّح تدوينات قصيرة مفيدة."><meta property="og:title" content="Mohammad Alfarras"><meta property="og:description" content="شارك رأيك (1–5 نجوم) — وتصفّح تدوينات قصيرة مفيدة."><meta property="og:image" content="../logo.jpeg">
+</head><body>
+<canvas id="aurora"></canvas><canvas id="stars"></canvas><canvas id="trail"></canvas>
+<header class="glass"><div class="container navbar">
+<a class="brand" href="index.html"><img src="../logo.jpeg" alt="logo"><b>Mohammad Alfarras</b></a>
+<div class="actions"><button id="lang" class="icon-btn">🌐</button><button id="dark" class="icon-btn">🌙</button></div>
+</div></header>
+<section class="section"><div class="container">
+  <div class="glass media-card reveal">
+    <h1 class="words">آراء الزوار + مدونتي</h1>
+    <p class="lead words">شارك رأيك (1–5 نجوم) — وتصفّح تدوينات قصيرة مفيدة.</p>
+    <form id="guest-form" class="form" onsubmit="submitGuest(event)">
+      <input class="input" name="name" placeholder="الاسم / Name" required>
+      <select class="input" name="rate">
+        <option value="5">★★★★★ — 5</option>
+        <option value="4">★★★★☆ — 4</option>
+        <option value="3">★★★☆☆ — 3</option>
+        <option value="2">★★☆☆☆ — 2</option>
+        <option value="1">★☆☆☆☆ — 1</option>
+      </select>
+      <textarea class="input" name="msg" rows="3" placeholder="اكتب رأيك باختصار..." required></textarea>
+      <button class="btn">إرسال</button>
+    </form>
+  </div>
+  <div id="guest-list" class="cards-guest"></div>
+
+<div class="glass media-card reveal" style="margin-top:12px">
+  <h2 class="words">✍️ مدونتي الخفيفة</h2>
+  <div class="cards">
+    <div class="glass media-card"><b>كيف تختار سماعة بلوتوث؟</b><p class="lead" style="margin-top:6px">اختبر الراحة قبل الصوت، والبطارية قبل المزايا — القرار على الاستخدام الحقيقي.</p></div>
+    <div class="glass media-card"><b>IPTV بدون صداع</b><p class="lead" style="margin-top:6px">مصدر موثوق + دعم سريع = مشاهدة من غير انقطاع.</p></div>
+  </div>
+</div>
+</div></section>
+<footer class="glass"><div class="container">صُمم بكل حب ❤️ — محمد الفراس — © <span id="year"></span>
+<div class="lang-switch" style="margin-top:8px"><a href="../ar/index.html">AR</a><a href="../en/index.html">EN</a><a href="../de/index.html">DE</a></div>
+</div></footer>
+<a href="https://wa.me/004917623419358" class="chat-fab" aria-label="WhatsApp">💬</a>
+<script src="../app.js"></script>
+</body></html>

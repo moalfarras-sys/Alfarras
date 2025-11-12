@@ -1,0 +1,36 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Ads — AdSense & Sponsorship</title><link rel="icon" href="../favicon.ico">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<link rel="manifest" href="../manifest.webmanifest"><meta name="theme-color" content="#0ea5e9"><link rel="apple-touch-icon" href="../icons/icon-192.png">
+<meta name="description" content="Page ready for AdSense and a custom promo slot."><meta property="og:title" content="Mohammad Alfarras"><meta property="og:description" content="Page ready for AdSense and a custom promo slot."><meta property="og:image" content="../logo.jpeg">
+</head><body>
+<canvas id="aurora"></canvas><canvas id="stars"></canvas><canvas id="trail"></canvas>
+<header class="glass"><div class="container navbar">
+<a class="brand" href="index.html"><img src="../logo.jpeg" alt="logo"><b>Mohammad Alfarras</b></a>
+<div class="actions"><button id="lang" class="icon-btn">🌐</button><button id="dark" class="icon-btn">🌙</button></div>
+</div></header>
+<section class="section"><div class="container">
+<div class="glass media-card reveal"><h1 class="words">Ads — AdSense & Sponsorship</h1><p class="lead words">Page ready for AdSense and a custom promo slot.</p></div>
+<div class="glass media-card reveal" style="padding:10px">
+  <h3 style="margin:0 0 8px">Google AdSense (جاهز)</h3>
+  <ins class="adsbygoogle" style="display:block" data-ad-format="auto" data-full-width-responsive="true" data-ad-client="ca-pub-XXXX" data-ad-slot="1234567890"></ins>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXX" crossorigin="anonymous"></script>
+  <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+</div>
+<div class="glass media-card reveal" id="promo-slider" style="text-align:center">
+  <img id="promo-img" src="../ad-iphone17pro.jpg" alt="Promo" style="width:100%;max-height:340px;object-fit:cover;border-radius:12px;border:1px solid var(--brd)">
+  <div style="opacity:.7;margin-top:6px">سلايدر بسيط — بدّل الصور من الأسفل.</div>
+</div>
+<script>
+const _slides=['../ad-iphone17pro.jpg','../logo.jpeg']; let _i=0;
+setInterval(()=>{_i=(_i+1)%_slides.length; const el=document.getElementById('promo-img'); if(el){el.src=_slides[_i];}}, 6000);
+</script>
+</div></section>
+<footer class="glass"><div class="container">صُمم بكل حب ❤️ — محمد الفراس — © <span id="year"></span>
+<div class="lang-switch" style="margin-top:8px"><a href="../ar/index.html">AR</a><a href="../en/index.html">EN</a><a href="../de/index.html">DE</a></div>
+</div></footer>
+<a href="https://wa.me/004917623419358" class="chat-fab" aria-label="WhatsApp">💬</a>
+<script src="../app.js"></script>
+</body></html>
