@@ -2,192 +2,609 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>خدمة مشاهدة المحتوى عبر الإنترنت — IPTV Stream Experience</title>
-  <link rel="stylesheet" href="../style.css">
+  <title>خدمة المشاهدة الرقمية IPTV | محمد الفراس</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ألوان وثيم زجاجي -->
+  <style>
+    :root {
+      --bg: #020617;
+      --accent: #22d3ee;
+      --accent-2: #38bdf8;
+      --accent-soft: rgba(56,189,248,0.18);
+      --glass: rgba(15,23,42,0.82);
+      --border: rgba(148,163,184,0.45);
+      --text: #e5e7eb;
+      --text-soft: #cbd5f5;
+      --radius: 20px;
+      --shadow: 0 18px 45px rgba(15,23,42,0.9);
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #0b1220 0, #020617 55%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
+      scroll-behavior: smooth;
+    }
+
+    body.dark {
+      background: radial-gradient(circle at top, #020617 0, #000 55%, #020617 100%);
+    }
+
+    /* خلفية شفق سماوي */
+    .aurora {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .aurora span {
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 999px;
+      filter: blur(80px);
+      opacity: 0.65;
+      mix-blend-mode: screen;
+    }
+    .aurora span:nth-child(1){background:#22d3ee;top:-80px;left:-40px;}
+    .aurora span:nth-child(2){background:#38bdf8;top:40%;right:-120px;}
+    .aurora span:nth-child(3){background:#a855f7;bottom:-140px;left:10%;}
+    .aurora span:nth-child(4){background:#f97316;top:5%;right:30%;}
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 16px 60px;
+    }
+
+    .top-bar {
+      text-align: center;
+      padding: 6px 10px;
+      font-size: 13px;
+      color: var(--text-soft);
+      background: linear-gradient(90deg, rgba(34,211,238,0.26), rgba(59,130,246,0.18));
+      border-bottom: 1px solid var(--border);
+    }
+
+    header.glass {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(24px);
+      background: linear-gradient(120deg, rgba(15,23,42,0.96), rgba(15,23,42,0.75));
+      border-bottom: 1px solid var(--border);
+    }
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 64px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      box-shadow: 0 0 18px rgba(34,211,238,0.7);
+      object-fit: cover;
+      animation: floatLogo 4s ease-in-out infinite;
+    }
+    .brand-text b { display:block;font-size:16px; }
+    .brand-text span { display:block;font-size:11px;opacity:.8; }
+
+    .actions {
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+    .icon-btn {
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(15,23,42,0.9);
+      color: var(--text-soft);
+      padding: 6px 10px;
+      cursor: pointer;
+      font-size: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .icon-btn:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 12px rgba(34,211,238,0.4);
+    }
+
+    main { padding-top: 20px; }
+
+    .glass {
+      border-radius: var(--radius);
+      background: radial-gradient(circle at top left, rgba(34,211,238,0.12), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(59,130,246,0.16), transparent 55%),
+                  var(--glass);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      display:grid;
+      grid-template-columns: minmax(0,3fr) minmax(0,2.1fr);
+      gap: 20px;
+      padding: 20px 18px 18px;
+    }
+    .badge {
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:3px 10px;
+      border-radius:999px;
+      border:1px solid rgba(94,234,212,0.6);
+      background: radial-gradient(circle at top, rgba(34,211,238,0.26), transparent);
+      font-size:12px;
+      color:var(--text-soft);
+    }
+    h1, h2, h3 {
+      margin: 8px 0;
+    }
+    h1 {
+      font-size: clamp(24px, 4vw, 30px);
+    }
+    .lead {
+      font-size:14px;
+      line-height:1.9;
+      color:var(--text-soft);
+    }
+    .lead.small { font-size:12px; }
+
+    .quick {
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .hero-media {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .hero-card {
+      padding:14px;
+      border-radius:18px;
+      background: rgba(15,23,42,0.9);
+      border:1px solid var(--border);
+      text-align:center;
+    }
+    .hero-card img {
+      width:120px;
+      height:120px;
+      border-radius:26px;
+      object-fit:cover;
+      margin-bottom:8px;
+      box-shadow:0 18px 36px rgba(0,0,0,0.85);
+    }
+
+    .btn {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      padding:8px 16px;
+      border-radius:999px;
+      border:1px solid rgba(56,189,248,0.9);
+      background: linear-gradient(120deg,#06b6d4,#3b82f6);
+      color:#020617;
+      font-size:13px;
+      text-decoration:none;
+      cursor:pointer;
+      box-shadow:0 12px 30px rgba(15,23,42,0.9);
+      white-space:nowrap;
+    }
+    .btn.secondary {
+      background:rgba(15,23,42,0.96);
+      color:var(--text-soft);
+      border-color:var(--border);
+      box-shadow:none;
+    }
+    .btn:hover {
+      filter:brightness(1.08);
+      box-shadow:0 16px 42px rgba(15,23,42,1);
+    }
+
+    .cards {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+      gap:18px;
+      margin-top:20px;
+    }
+    .card {
+      padding:16px 16px 18px;
+      border-radius:var(--radius);
+      background: rgba(15,23,42,0.92);
+      border:1px solid var(--border);
+    }
+    .card h3 { font-size:17px; }
+
+    .bullet {
+      padding-right:18px;
+      list-style:none;
+    }
+    .bullet li::before {
+      content:"• ";
+      color:var(--accent-2);
+    }
+    .bullet li { margin-bottom:6px; }
+
+    .steps {
+      display:grid;
+      grid-template-columns: minmax(0,1.2fr) minmax(0,1fr);
+      gap:16px;
+      margin-top:18px;
+    }
+
+    .input, select.input {
+      width:100%;
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:rgba(15,23,42,0.94);
+      color:var(--text);
+      font-size:13px;
+      margin-top:6px;
+    }
+
+    .legal {
+      font-size:11px;
+      line-height:1.8;
+      color:var(--text-soft);
+      border-right:3px solid rgba(248,250,252,0.35);
+      padding-right:10px;
+      margin-top:10px;
+    }
+
+    footer.glass {
+      margin-top:34px;
+      padding:10px 0;
+      font-size:12px;
+      text-align:center;
+      color:var(--text-soft);
+    }
+
+    /* حركات */
+    .reveal {
+      opacity:0;
+      transform:translateY(18px);
+      animation: fadeUp 0.8s ease forwards;
+    }
+    .reveal.delay-1 { animation-delay: 0.15s; }
+    .reveal.delay-2 { animation-delay: 0.3s; }
+    .reveal.delay-3 { animation-delay: 0.45s; }
+
+    @keyframes fadeUp {
+      to {
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+    @keyframes floatLogo {
+      0%{transform:translateY(0);}
+      50%{transform:translateY(-4px);}
+      100%{transform:translateY(0);}
+    }
+
+    .chat-fab {
+      position:fixed;
+      bottom:18px;
+      left:18px;
+      width:44px;
+      height:44px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:none;
+      background:radial-gradient(circle at top,#22c55e,#16a34a);
+      color:#f9fafb;
+      text-decoration:none;
+      font-size:22px;
+      box-shadow:0 14px 30px rgba(22,163,74,0.7);
+      z-index:35;
+    }
+
+    #top {
+      position:fixed;
+      bottom:18px;
+      right:18px;
+      width:32px;
+      height:32px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(15,23,42,0.96);
+      color:var(--text-soft);
+      cursor:pointer;
+      font-size:16px;
+      display:none;
+      z-index:35;
+    }
+
+    @media (max-width: 768px){
+      .navbar { gap:8px; }
+      .brand-text b { font-size:14px; }
+      .hero { grid-template-columns:minmax(0,1fr); }
+      .hero-media { order:-1;margin-bottom:8px; }
+      .steps { grid-template-columns:minmax(0,1fr); }
+    }
+    @media (max-width: 480px){
+      .container { padding:0 10px 40px; }
+      .hero { padding:16px 12px 14px; }
+      .hero-card img { width:100px;height:100px; }
+      .btn { width:100%;justify-content:center; }
+    }
+  </style>
 </head>
 <body>
-<div class="top-bar">
-  📺 تجربة مشاهدة رقمية مرنة — سنة بـ 40€ أو سنتين بـ 70€ مع دعم كامل.
-</div>
-
-<header class="glass">
-  <div class="container navbar">
-    <a class="brand" href="index.html">
-      <img src="../logo.png" alt="شعار">
-      <b>Mohammad Alfarras</b>
-    </a>
-    <div class="actions">
-      <button id="dark" class="icon-btn">🌙</button>
-    </div>
+  <!-- شفق سماوي -->
+  <div class="aurora">
+    <span></span><span></span><span></span><span></span>
   </div>
-</header>
 
-<div class="container">
+  <!-- شريط علوي -->
+  <div class="top-bar">
+    خدمة مشاهدة رقمية مرنة — اشتراك سنة 40€ أو سنتين 70€ مع دعم شخصي وخطوات واضحة.
+  </div>
 
-  <!-- مقدمة الخدمة -->
-  <section class="section glass">
-    <h1>خدمة مشاهدة المحتوى عبر الإنترنت (IPTV Stream Experience)</h1>
-    <p class="lead">
-      إذا كنت تبحث عن طريقة حديثة ومرنة لمشاهدة المحتوى عبر الإنترنت بجودة عالية، فأنت في المكان الصحيح.
-      <b>IPTV Stream Experience</b> هي خدمة أقدّمها لك لتسهّل عليك تجربة البث الرقمي على أجهزتك المختلفة، مع إعداد مبسّط ودعم شخصي خطوة بخطوة.
-    </p>
-    <p class="lead">
-      أركّز على أن تكون التجربة مستقرة وسهلة، بعيدًا عن التعقيد التقني، بحيث تستطيع الاستمتاع بمحتواك المفضل بدون صداع إعدادات أو بحث طويل عن الشروحات.
-    </p>
-  </section>
-
-  <!-- المزايا + الباقات -->
-  <section class="section">
-    <div class="cards">
-
-      <div class="media-card glass">
-        <h2>لماذا هذه الخدمة؟</h2>
-        <ul class="lead" style="padding-right:18px;">
-          <li>إعداد مبسّط ومناسب للمبتدئ والمحترف.</li>
-          <li>إمكانية الاستخدام على أجهزة متعددة: هواتف، أجهزة لوحية، شاشات ذكية، و TV Box.</li>
-          <li>دليل واضح لتثبيت التطبيقات وربطها بالخدمة.</li>
-          <li>دعم وسند عبر واتساب لأي سؤال أو مشكلة.</li>
-        </ul>
+  <!-- هيدر -->
+  <header class="glass">
+    <div class="container navbar">
+      <a href="#" class="brand">
+        <img src="assets/img/logo.png" alt="Logo" class="brand-logo">
+        <div class="brand-text">
+          <b>Mohammad Alfarras</b>
+          <span>Unboxing • Tech • IPTV Guidance</span>
+        </div>
+      </a>
+      <div class="actions">
+        <button id="dark" class="icon-btn" aria-label="الوضع الداكن">🌙</button>
       </div>
-
-      <div class="media-card glass">
-        <h2>الباقات المتوفّرة</h2>
-        <p class="lead">
-          الأسعار التالية مخصّصة للخدمة التقنية، الإعداد، والمتابعة، بحيث تحصل على تجربة مشاهدة مريحة ومستمرة:
-        </p>
-        <ul class="lead" style="padding-right:18px;">
-          <li><b>اشتراك سنة كاملة:</b> 40€</li>
-          <li><b>اشتراك سنتين:</b> 70€</li>
-        </ul>
-        <p class="lead">
-          بعد الاشتراك يمكنك التواصل معي لتجهيز الخدمة وربطها بأجهزتك بالطريقة الأنسب لك.
-        </p>
-      </div>
-
     </div>
-  </section>
+  </header>
 
-  <!-- طرق الدفع الأساسية -->
-  <section class="section">
-    <div class="cards">
+  <main class="container">
 
-      <div class="media-card glass">
-        <h2>طرق الدفع</h2>
+    <!-- هيرو -->
+    <section class="glass hero reveal">
+      <div>
+        <span class="badge">خدمة المشاهدة الرقمية IPTV Stream Experience</span>
+        <h1>شاهد محتواك المفضل بأسلوب بسيط، واضح… ومع دعم شخصي من أول لحظة.</h1>
         <p class="lead">
-          يمكنك الدفع بأمان وسهولة باستخدام PayPal، أو التنسيق معي مباشرة عبر واتساب لاختيار الطريقة الأنسب لك.
+          خدمة IPTV التي أقدّمها ليست مجرد اشتراك عادي، بل تجربة كاملة أساعدك فيها على اختيار التطبيق المناسب،
+          الإعداد الصحيح، وحل المشاكل خطوة بخطوة. كل شيء يبدأ من فهم جهازك، وسرعة اتصالك، وما يناسب نمط حياتك.
+        </p>
+        <p class="lead">
+          سواء كنت تحب متابعة المباريات، المسلسلات، أو المحتوى الترفيهي العائلي، نحاول أن نجعل التجربة قدر المستطاع
+          مستقرة، مرتبة، وسهلة الاستخدام، مع شرح واضح من دون مصطلحات معقدة.
         </p>
         <div class="quick">
-          <a class="btn" href="https://www.paypal.me/moalfarras" target="_blank">
-            💳 الدفع عبر PayPal
+          <a href="https://wa.me/004917623419358?text=IPTV%20Inquiry" target="_blank" class="btn">
+            💬 اسألني عن الاشتراك الآن
           </a>
-          <a class="btn secondary" href="https://wa.me/004917623419358?text=IPTV%20Inquiry" target="_blank">
-            💬 تواصل على واتساب
+          <a href="https://www.paypal.me/moalfarras" target="_blank" class="btn secondary">
+            💳 الدفع عبر PayPal
           </a>
         </div>
       </div>
-
-      <div class="media-card glass" style="display:flex;gap:12px;align-items:center;">
-        <img src="../paypal-qr.png" alt="PayPal QR" style="width:120px;border-radius:12px;border:1px solid var(--brd)">
-        <div>
-          <b>الدفع عن طريق QR</b>
-          <p class="lead">
-            افتح الكاميرا أو تطبيق PayPal وامسح رمز QR للدفع بسرعة وسهولة.
+      <div class="hero-media">
+        <div class="hero-card">
+          <!-- عدّل مسار الصورة حسب مجلداتك -->
+          <img src="assets/img/iptv-main.jpg" alt="IPTV" />
+          <p class="lead small">
+            إعداد تقني، تهيئة تطبيقات، ومتابعة بعد الاشتراك — من دون استضافة أو توزيع محتوى محمي.
           </p>
         </div>
       </div>
+    </section>
 
-    </div>
-  </section>
-
-  <!-- رابط التطبيقات -->
-  <section class="section">
-    <div class="media-card glass">
-      <h2>تطبيقات المشاهدة المدعومة</h2>
-      <p class="lead">
-        لاستخدام الخدمة تحتاج إلى تثبيت التطبيق المناسب لجهازك. من خلال الرابط التالي تجد قائمة بالتطبيقات المتوافقة
-        مع أنواع مختلفة من الأجهزة، لتختار ما يناسبك:
-      </p>
-      <a class="btn" href="https://aroma-tv.show/apps" target="_blank">
-        🌐 استعراض التطبيقات المتاحة
-      </a>
-      <p class="lead" style="margin-top:10px;">
-        بعد تثبيت التطبيق، سأساعدك في ربطه بالخدمة وتفعيل بياناتك خطوة بخطوة.
-      </p>
-    </div>
-  </section>
-
-  <!-- خطوات الاشتراك التفاعلية -->
-  <section class="section">
-    <div class="media-card glass">
-      <h2>خطوات الاشتراك السريع</h2>
-
-      <div id="iptv-step-1">
-        <p class="lead">1️⃣ اختر نوع جهازك:</p>
-        <select id="iptv-device" class="input">
-          <option>Android TV / TV Box</option>
-          <option>Smart TV</option>
-          <option>iPhone / iPad</option>
-          <option>هاتف أو تابلت بنظام Android</option>
-          <option>Windows / Mac</option>
-        </select>
-        <button class="btn" style="margin-top:10px;" onclick="nextIPTVStep(1)">التالي</button>
+    <!-- الباقات والمميزات -->
+    <section class="reveal delay-1" style="margin-top:20px;">
+      <div class="cards">
+        <div class="card">
+          <h3>الباقات المتوفّرة</h3>
+          <p class="lead">
+            الأسعار التالية تشمل الخدمة التقنية، المتابعة، والإرشاد حسب جهازك واحتياجك:
+          </p>
+          <ul class="bullet lead">
+            <li><b>اشتراك سنة كاملة:</b> 40€</li>
+            <li><b>اشتراك سنتين:</b> 70€</li>
+          </ul>
+          <p class="lead">
+            بعد الدفع عبر PayPal، كل ما عليك هو التواصل معي على واتساب لإتمام الإعداد وربط الخدمة بأجهزتك.
+          </p>
+        </div>
+        <div class="card">
+          <h3>مميزات الخدمة</h3>
+          <ul class="bullet lead">
+            <li>توجيه شخصي لاختيار أفضل تطبيقات المشاهدة المناسبة لجهازك.</li>
+            <li>شرح مبسط خطوة بخطوة حتى يعمل كل شيء بشكل صحيح.</li>
+            <li>دعم فني عبر واتساب في حال وجود أسئلة أو مشاكل.</li>
+            <li>تركيز على الاستقرار وسهولة الاستخدام قدر الإمكان.</li>
+          </ul>
+          <p class="lead small">
+            ملاحظة: جودة التجربة تعتمد أيضًا على سرعة واستقرار اتصال الإنترنت لديك، ونوع جهازك المستخدم.
+          </p>
+        </div>
       </div>
+    </section>
 
-      <div id="iptv-step-2" style="display:none">
-        <p class="lead">2️⃣ اختر مدة الاشتراك:</p>
-        <select id="iptv-duration" class="input">
-          <option>اشتراك سنة — 40€</option>
-          <option>اشتراك سنتين — 70€</option>
-        </select>
-        <button class="btn" style="margin-top:10px;" onclick="nextIPTVStep(2)">التالي</button>
+    <!-- التطبيقات المدعومة + aroma-tv -->
+    <section class="reveal delay-2" style="margin-top:20px;">
+      <div class="cards">
+        <div class="card">
+          <h3>تطبيقات المشاهدة الموصى بها</h3>
+          <p class="lead">
+            لاستخدام الخدمة تحتاج لتطبيق مناسب لجهازك (تلفزيون ذكي، TV Box، جوال، تابلت، أو كمبيوتر).
+            من الرابط التالي يمكنك استعراض مجموعة من التطبيقات المتوافقة مع أجهزة مختلفة:
+          </p>
+          <a href="https://aroma-tv.show/apps" target="_blank" class="btn">
+            🌐 استعراض تطبيقات المشاهدة (Aroma Apps)
+          </a>
+          <p class="lead small" style="margin-top:8px;">
+            بعد تثبيت التطبيق، أساعدك على إدخال البيانات اللازمة وربط الخدمة بطريقة آمنة وواضحة.
+          </p>
+        </div>
+        <div class="card">
+          <h3>كيف أساعدك عمليًا؟</h3>
+          <p class="lead">
+            • اقتراح التطبيق الأنسب لجهازك ونظامك.<br>
+            • توضيح خطوات التفعيل والإعداد الأول.<br>
+            • شرح مبسط لكيفية التنقل واستخدام القوائم.<br>
+            • نصائح للحفاظ على استقرار التجربة قدر الإمكان.
+          </p>
+        </div>
       </div>
+    </section>
 
-      <div id="iptv-step-3" style="display:none">
-        <p class="lead">3️⃣ أدخل بيانات بسيطة لبدء تجهيز طلبك:</p>
-        <input id="iptv-name" class="input" placeholder="الاسم الكامل">
-        <input id="iptv-country" class="input" placeholder="الدولة / المدينة">
-        <button class="btn" style="margin-top:10px;" onclick="nextIPTVStep(3)">
-          إرسال الطلب على واتساب
-        </button>
-        <p class="lead" style="margin-top:8px;opacity:.8;">
-          سيتم فتح واتساب مع رسالة جاهزة تحتوي على بياناتك الأساسية، ويمكننا بعدها إكمال جميع التفاصيل بسهولة.
-        </p>
+    <!-- خطوات الاشتراك التفاعلية -->
+    <section class="glass reveal delay-3" style="margin-top:24px;">
+      <div class="steps">
+        <div>
+          <h3>خطوات الاشتراك السريع</h3>
+          <p class="lead">
+            املأ المعلومات التالية بخطوات بسيطة، وسوف يتم فتح واتساب مع رسالة جاهزة يمكنك إرسالها مباشرة:
+          </p>
+          <div id="iptv-step-1">
+            <p class="lead"><b>1️⃣ نوع جهازك الرئيسي:</b></p>
+            <select id="iptv-device" class="input">
+              <option>Android TV / TV Box</option>
+              <option>Smart TV</option>
+              <option>iPhone / iPad</option>
+              <option>هاتف أو تابلت بنظام Android</option>
+              <option>Windows / Mac</option>
+            </select>
+            <button class="btn" style="margin-top:10px;" onclick="nextIPTVStep(1)">التالي</button>
+          </div>
+
+          <div id="iptv-step-2" style="display:none">
+            <p class="lead"><b>2️⃣ مدة الاشتراك:</b></p>
+            <select id="iptv-duration" class="input">
+              <option>اشتراك سنة — 40€</option>
+              <option>اشتراك سنتين — 70€</option>
+            </select>
+            <button class="btn" style="margin-top:10px;" onclick="nextIPTVStep(2)">التالي</button>
+          </div>
+
+          <div id="iptv-step-3" style="display:none">
+            <p class="lead"><b>3️⃣ بيانات التواصل:</b></p>
+            <input id="iptv-name" class="input" placeholder="الاسم الكامل">
+            <input id="iptv-country" class="input" placeholder="الدولة / المدينة">
+            <button class="btn" style="margin-top:10px;" onclick="nextIPTVStep(3)">
+              إرسال الطلب على واتساب
+            </button>
+            <p class="lead small" style="margin-top:8px;">
+              سيُفتح واتساب مع رسالة تحتوي على البيانات التي أدخلتها، ويمكنك إضافة أي ملاحظات إضافية قبل الإرسال.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <h3>نص قانوني مهم</h3>
+          <div class="legal">
+            هذه الخدمة تركز على الإعداد التقني، الدعم، وتسهيل تجربة المشاهدة عبر الإنترنت فقط.
+            لا يتم عبر هذا الموقع أو عبر محمد الفراس استضافة أو تخزين أو بيع أو إعادة توزيع
+            أي محتوى تلفزيوني أو سينمائي محمي بحقوق نشر. <br><br>
+            استخدام أي بيانات أو اشتراك يتم تحت مسؤولية المستخدم الكاملة، مع ضرورة
+            التقيّد بالقوانين المحلية في بلد الإقامة، وبشروط استخدام التطبيقات والمنصات
+            التي يتم تشغيلها على أجهزتك. <br><br>
+            من خلال طلبك للخدمة، فإنك تقرّ بأنك مسؤول عن طريقة استخدامك لها، وأن دور
+            محمد الفراس يقتصر على الدعم التقني والإرشاد فقط.
+          </div>
+        </div>
       </div>
+    </section>
+  </main>
+
+  <footer class="glass">
+    <div class="container">
+      صُمم بكل ❤️ بواسطة محمد الفراس — moalfarras.space — © <span id="year"></span>
     </div>
-  </section>
+  </footer>
 
-  <!-- ملاحظة قانونية بسيطة -->
-  <section class="section">
-    <div class="media-card glass">
-      <h3>ملاحظة مهمة</h3>
-      <p class="lead" style="font-size:14px;">
-        هذه الخدمة تركز على تسهيل تجربة المشاهدة عبر الإنترنت من الناحية التقنية والإعدادية فقط.
-        لا يتم استضافة أو توزيع أي محتوى محمي بحقوق نشر من خلال هذا الموقع، وأي استخدام للمحتوى يخضع بالكامل
-        لقوانين بلد المستخدم وشروط المنصات والتطبيقات المستخدمة.
-      </p>
-    </div>
-  </section>
+  <a href="https://wa.me/004917623419358" class="chat-fab" aria-label="WhatsApp">💬</a>
+  <button id="top" title="إلى الأعلى">↑</button>
 
-</div>
+  <!-- سكربت الحركات والدارك + خطوات الواتساب -->
+  <script>
+    // سنة الفوتر
+    const yEl = document.getElementById('year');
+    if (yEl) yEl.textContent = new Date().getFullYear();
 
-<footer class="glass">
-  <div class="container">
-    صُمم بكل حب ❤️ — محمد الفراس — © <span id="year"></span>
-  </div>
-</footer>
+    // دارك مود
+    const darkBtn = document.getElementById('dark');
+    if (darkBtn) {
+      const saved = localStorage.getItem('iptv-theme');
+      if (saved === 'dark') document.body.classList.add('dark');
+      darkBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark');
+        localStorage.setItem(
+          'iptv-theme',
+          document.body.classList.contains('dark') ? 'dark' : 'light'
+        );
+      });
+    }
 
-<a href="https://wa.me/004917623419358" class="chat-fab" aria-label="WhatsApp">💬</a>
-<button id="top" title="إلى الأعلى">↑</button>
+    // زر للأعلى
+    const topBtn = document.getElementById('top');
+    window.addEventListener('scroll', () => {
+      topBtn.style.display = window.scrollY > 260 ? 'block' : 'none';
+    });
+    topBtn.addEventListener('click', () =>
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    );
 
-<div id="lightbox-overlay">
-  <img id="lightbox-img" src="" alt="preview">
-</div>
+    // خطوات IPTV → واتساب
+    function nextIPTVStep(step) {
+      const s1 = document.getElementById('iptv-step-1');
+      const s2 = document.getElementById('iptv-step-2');
+      const s3 = document.getElementById('iptv-step-3');
+      if (!s1 || !s2 || !s3) return;
 
-<script>
-  const yEl = document.getElementById('year');
-  if (yEl) yEl.textContent = new Date().getFullYear();
-</script>
-<script src="../app.js"></script>
+      if (step === 1) {
+        s1.style.display = 'none';
+        s2.style.display = 'block';
+      } else if (step === 2) {
+        s2.style.display = 'none';
+        s3.style.display = 'block';
+      } else if (step === 3) {
+        const device = document.getElementById('iptv-device')?.value || '';
+        const duration = document.getElementById('iptv-duration')?.value || '';
+        const name = document.getElementById('iptv-name')?.value || '';
+        const country = document.getElementById('iptv-country')?.value || '';
+
+        const msg = encodeURIComponent(
+          'IPTV Anfrage / طلب IPTV\\n' +
+          'Name: ' + name + '\\n' +
+          'Land / Country: ' + country + '\\n' +
+          'Gerät / Device: ' + device + '\\n' +
+          'Dauer / Duration: ' + duration + '\\n'
+        );
+
+        window.open(
+          'https://wa.me/004917623419358?text=' + msg,
+          '_blank'
+        );
+      }
+    }
+    window.nextIPTVStep = nextIPTVStep;
+  </script>
 </body>
 </html>
