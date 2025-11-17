@@ -1,54 +1,617 @@
-<!doctype html><html lang="en"><head>
-<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>IPTV — Trusted plans</title><link rel="icon" href="../favicon.ico">
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../style.css">
-<link rel="manifest" href="../manifest.webmanifest"><meta name="theme-color" content="#0ea5e9"><link rel="apple-touch-icon" href="../icons/icon-192.png">
-<meta name="description" content="€40/year — €70/2 years — quick activation & support."><meta property="og:title" content="Mohammad Alfarras"><meta property="og:description" content="€40/year — €70/2 years — quick activation & support."><meta property="og:image" content="../logo.jpeg">
-</head><body>
-<canvas id="aurora"></canvas><canvas id="stars"></canvas><canvas id="trail"></canvas>
-<header class="glass"><div class="container navbar">
-<a class="brand" href="index.html"><img src="../logo.jpeg" alt="logo"><b>Mohammad Alfarras</b></a>
-<div class="actions"><button id="lang" class="icon-btn">🌐</button><button id="dark" class="icon-btn">🌙</button></div>
-</div></header>
-<section class="section"><div class="container">
-<div class="glass media-card reveal"><h1 class="words">IPTV — Trusted plans <img src="../iptv-icon.jpg" alt="IPTV" style="width:38px;height:38px;border-radius:10px;border:1px solid var(--brd);margin-inline-start:8px;vertical-align:middle"></h1>
-<p class="lead words">€40/year — €70/2 years — quick activation & support.</p></div>
-<div class="cards" style="margin-top:12px">
-  <div class="glass media-card reveal"><h2>1 Year — €40</h2><ul><li>✅ 13k+ Channels</li><li>✅ 40k+ VOD</li><li>✅ Android / iOS / Smart TV</li></ul>
-    <div class="quick"><a class="btn" target="_blank" href="https://www.paypal.me/moalfarras">PayPal.me</a>
-    <a class="btn secondary" target="_blank" href="https://wa.me/004917623419358?text=IPTV%201%20Year%2040€">WhatsApp</a></div></div>
-  <div class="glass media-card reveal"><h2>2 Years — €70</h2><ul><li>✅ 13k+ Channels</li><li>✅ 40k+ VOD</li><li>✅ Android / iOS / Smart TV</li></ul>
-    <div class="quick"><a class="btn" target="_blank" href="https://www.paypal.me/moalfarras">PayPal.me</a>
-    <a class="btn secondary" target="_blank" href="https://wa.me/004917623419358?text=IPTV%202%20Years%2070€">WhatsApp</a></div></div>
-  <div class="glass media-card reveal" style="display:flex;align-items:center;gap:12px"><img src="../paypal-qr.jpeg" alt="PayPal QR" style="width:120px;border-radius:12px;border:1px solid var(--brd)"><div><b>Scan to pay</b><div style="opacity:.8">PayPal.me/moalfarras</div></div></div>
-</div>
-<div class="glass media-card reveal" style="text-align:center;margin-top:12px">
-  <h2 class="typing glow" style="white-space:nowrap;overflow:hidden">🔹 Get your favorite app</h2>
-  <p class="lead words" style="margin-top:6px">Pick the right client and enjoy crisp, stable streaming.</p>
-  <a class="btn" target="_blank" href="https://aroma-tv.show/apps">🌐 Apps link</a>
-</div>
-<div class="cards" style="margin-top:12px">
-  <div class="glass media-card reveal"><h3>Why my IPTV?</h3>
-    <p class="lead words">Peace of mind: stable servers, fast support, and a viewing experience that respects your screen.</p>
-    <ul>
-      <li>⚡ Activation within minutes with live follow-up.</li>
-      <li>📺 Works on Android TV, iOS, Smart TV, FireStick.</li>
-      <li>🗂️ Huge organized library for channels and VOD.</li>
-      <li>🛟 Support in Arabic/English via WhatsApp.</li>
-    </ul></div>
-  <div class="glass media-card reveal"><h3>Showcase</h3>
-    <div class="cards" style="grid-template-columns:repeat(2,1fr)">
-      <img src="../iptv-icon.jpg" style="width:100%;border-radius:12px;border:1px solid var(--brd)" alt="IPTV">
-      <img src="../logo.jpeg" style="width:100%;border-radius:12px;border:1px solid var(--brd)" alt="Channels">
-    </div>
-    <p class="lead" style="margin-top:8px">Clean interface, many channels, smooth playback.</p>
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>IPTV Stream Experience | Mohammad Alfarras</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    :root {
+      --bg: #020617;
+      --accent: #22d3ee;
+      --accent-2: #38bdf8;
+      --accent-soft: rgba(56,189,248,0.18);
+      --glass: rgba(15,23,42,0.82);
+      --border: rgba(148,163,184,0.45);
+      --text: #e5e7eb;
+      --text-soft: #cbd5f5;
+      --radius: 20px;
+      --shadow: 0 18px 45px rgba(15,23,42,0.9);
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #0b1220 0, #020617 55%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
+      scroll-behavior: smooth;
+    }
+
+    body.dark {
+      background: radial-gradient(circle at top, #020617 0, #000 55%, #020617 100%);
+    }
+
+    .aurora {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .aurora span {
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 999px;
+      filter: blur(80px);
+      opacity: 0.65;
+      mix-blend-mode: screen;
+    }
+    .aurora span:nth-child(1){background:#22d3ee;top:-80px;left:-40px;}
+    .aurora span:nth-child(2){background:#38bdf8;top:40%;right:-120px;}
+    .aurora span:nth-child(3){background:#a855f7;bottom:-140px;left:10%;}
+    .aurora span:nth-child(4){background:#f97316;top:5%;right:30%;}
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 16px 60px;
+    }
+
+    .top-bar {
+      text-align: center;
+      padding: 6px 10px;
+      font-size: 13px;
+      color: var(--text-soft);
+      background: linear-gradient(90deg, rgba(34,211,238,0.26), rgba(59,130,246,0.18));
+      border-bottom: 1px solid var(--border);
+    }
+
+    header.glass {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(24px);
+      background: linear-gradient(120deg, rgba(15,23,42,0.96), rgba(15,23,42,0.75));
+      border-bottom: 1px solid var(--border);
+    }
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 64px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      box-shadow: 0 0 18px rgba(34,211,238,0.7);
+      object-fit: cover;
+      animation: floatLogo 4s ease-in-out infinite;
+    }
+    .brand-text b { display:block;font-size:16px; }
+    .brand-text span { display:block;font-size:11px;opacity:.8; }
+
+    .actions {
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+    .icon-btn {
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(15,23,42,0.9);
+      color: var(--text-soft);
+      padding: 6px 10px;
+      cursor: pointer;
+      font-size: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .icon-btn:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 12px rgba(34,211,238,0.4);
+    }
+
+    main { padding-top: 20px; }
+
+    .glass {
+      border-radius: var(--radius);
+      background: radial-gradient(circle at top left, rgba(34,211,238,0.12), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(59,130,246,0.16), transparent 55%),
+                  var(--glass);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      display:grid;
+      grid-template-columns: minmax(0,3fr) minmax(0,2.1fr);
+      gap: 20px;
+      padding: 20px 18px 18px;
+    }
+    .badge {
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:3px 10px;
+      border-radius:999px;
+      border:1px solid rgba(94,234,212,0.6);
+      background: radial-gradient(circle at top, rgba(34,211,238,0.26), transparent);
+      font-size:12px;
+      color:var(--text-soft);
+    }
+    h1, h2, h3 {
+      margin: 8px 0;
+    }
+    h1 {
+      font-size: clamp(24px, 4vw, 30px);
+    }
+    .lead {
+      font-size:14px;
+      line-height:1.9;
+      color:var(--text-soft);
+    }
+    .lead.small { font-size:12px; }
+
+    .quick {
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .hero-media {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .hero-card {
+      padding:14px;
+      border-radius:18px;
+      background: rgba(15,23,42,0.9);
+      border:1px solid var(--border);
+      text-align:center;
+    }
+    .hero-card img {
+      width:120px;
+      height:120px;
+      border-radius:26px;
+      object-fit:cover;
+      margin-bottom:8px;
+      box-shadow:0 18px 36px rgba(0,0,0,0.85);
+    }
+
+    .btn {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      padding:8px 16px;
+      border-radius:999px;
+      border:1px solid rgba(56,189,248,0.9);
+      background: linear-gradient(120deg,#06b6d4,#3b82f6);
+      color:#020617;
+      font-size:13px;
+      text-decoration:none;
+      cursor:pointer;
+      box-shadow:0 12px 30px rgba(15,23,42,0.9);
+      white-space:nowrap;
+    }
+    .btn.secondary {
+      background:rgba(15,23,42,0.96);
+      color:var(--text-soft);
+      border-color:var(--border);
+      box-shadow:none;
+    }
+    .btn:hover {
+      filter:brightness(1.08);
+      box-shadow:0 16px 42px rgba(15,23,42,1);
+    }
+
+    .cards {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+      gap:18px;
+      margin-top:20px;
+    }
+    .card {
+      padding:16px 16px 18px;
+      border-radius:var(--radius);
+      background: rgba(15,23,42,0.92);
+      border:1px solid var(--border);
+    }
+    .card h3 { font-size:17px; }
+
+    .bullet {
+      padding-left:18px;
+    }
+    .bullet li {
+      margin-bottom:6px;
+      list-style: none;
+    }
+    .bullet li::before {
+      content:"• ";
+      color:var(--accent-2);
+      margin-right:4px;
+    }
+
+    .steps {
+      display:grid;
+      grid-template-columns: minmax(0,1.2fr) minmax(0,1fr);
+      gap:16px;
+      margin-top:18px;
+    }
+
+    .input, select.input {
+      width:100%;
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:rgba(15,23,42,0.94);
+      color:var(--text);
+      font-size:13px;
+      margin-top:6px;
+    }
+
+    .legal {
+      font-size:11px;
+      line-height:1.8;
+      color:var(--text-soft);
+      border-left:3px solid rgba(248,250,252,0.35);
+      padding-left:10px;
+      margin-top:10px;
+    }
+
+    footer.glass {
+      margin-top:34px;
+      padding:10px 0;
+      font-size:12px;
+      text-align:center;
+      color:var(--text-soft);
+    }
+
+    .chat-fab {
+      position:fixed;
+      bottom:18px;
+      left:18px;
+      width:44px;
+      height:44px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:none;
+      background:radial-gradient(circle at top,#22c55e,#16a34a);
+      color:#f9fafb;
+      text-decoration:none;
+      font-size:22px;
+      box-shadow:0 14px 30px rgba(22,163,74,0.7);
+      z-index:35;
+    }
+
+    #top {
+      position:fixed;
+      bottom:18px;
+      right:18px;
+      width:32px;
+      height:32px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(15,23,42,0.96);
+      color:var(--text-soft);
+      cursor:pointer;
+      font-size:16px;
+      display:none;
+      z-index:35;
+    }
+
+    .reveal {
+      opacity:0;
+      transform:translateY(18px);
+      animation: fadeUp 0.8s ease forwards;
+    }
+    .reveal.delay-1 { animation-delay: 0.15s; }
+    .reveal.delay-2 { animation-delay: 0.3s; }
+    .reveal.delay-3 { animation-delay: 0.45s; }
+
+    @keyframes fadeUp {
+      to {
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+    @keyframes floatLogo {
+      0%{transform:translateY(0);}
+      50%{transform:translateY(-4px);}
+      100%{transform:translateY(0);}
+    }
+
+    @media (max-width: 768px){
+      .navbar { gap:8px; }
+      .brand-text b { font-size:14px; }
+      .hero { grid-template-columns:minmax(0,1fr); }
+      .hero-media { order:-1;margin-bottom:8px; }
+      .steps { grid-template-columns:minmax(0,1fr); }
+    }
+    @media (max-width: 480px){
+      .container { padding:0 10px 40px; }
+      .hero { padding:16px 12px 14px; }
+      .hero-card img { width:100px;height:100px; }
+      .btn { width:100%;justify-content:center; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Aurora -->
+  <div class="aurora">
+    <span></span><span></span><span></span><span></span>
   </div>
-</div>
-</div></section>
-<footer class="glass"><div class="container">صُمم بكل حب ❤️ — محمد الفراس — © <span id="year"></span>
-<div class="lang-switch" style="margin-top:8px"><a href="../ar/index.html">AR</a><a href="../en/index.html">EN</a><a href="../de/index.html">DE</a></div>
-</div></footer>
-<a href="https://wa.me/004917623419358" class="chat-fab" aria-label="WhatsApp">💬</a>
-<script src="../app.js"></script>
-</body></html>
+
+  <div class="top-bar">
+    Flexible IPTV experience – 1 year for 40€ or 2 years for 70€ with personal guidance and support.
+  </div>
+
+  <header class="glass">
+    <div class="container navbar">
+      <a href="#" class="brand">
+        <img src="assets/img/logo.png" alt="Logo" class="brand-logo">
+        <div class="brand-text">
+          <b>Mohammad Alfarras</b>
+          <span>Unboxing • Tech • IPTV Guidance</span>
+        </div>
+      </a>
+      <div class="actions">
+        <button id="dark" class="icon-btn" aria-label="Dark mode">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- HERO -->
+    <section class="glass hero reveal">
+      <div>
+        <span class="badge">IPTV Stream Experience</span>
+        <h1>Your IPTV journey – simple, transparent, and with real human support.</h1>
+        <p class="lead">
+          My IPTV service is more than just access – it is a guided experience.
+          I help you choose the right apps, configure things correctly, and avoid
+          common mistakes. Step by step, tailored to your device and your internet connection.
+        </p>
+        <p class="lead">
+          Whether you enjoy sports, series or family entertainment: the goal is to
+          make your experience as stable and comfortable as possible, with clear
+          explanations instead of confusing technical jargon.
+        </p>
+        <div class="quick">
+          <a href="https://wa.me/004917623419358?text=IPTV%20Inquiry" target="_blank" class="btn">
+            💬 Send IPTV inquiry via WhatsApp
+          </a>
+          <a href="https://www.paypal.me/moalfarras" target="_blank" class="btn secondary">
+            💳 Pay via PayPal
+          </a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <div class="hero-card">
+          <img src="assets/img/iptv-main.jpg" alt="IPTV" />
+          <p class="lead small">
+            Technical setup and guidance only – no hosting or distribution of copyrighted content.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLANS & FEATURES -->
+    <section class="reveal delay-1" style="margin-top:20px;">
+      <div class="cards">
+        <div class="card">
+          <h3>Available plans</h3>
+          <p class="lead">
+            These prices include technical support, configuration
+            and personal guidance:
+          </p>
+          <ul class="bullet lead">
+            <li><b>12 months:</b> 40€</li>
+            <li><b>24 months:</b> 70€</li>
+          </ul>
+          <p class="lead">
+            After paying via PayPal, simply contact me on WhatsApp
+            so we can complete the setup on your devices together.
+          </p>
+        </div>
+        <div class="card">
+          <h3>What you get</h3>
+          <ul class="bullet lead">
+            <li>Personal app recommendations depending on your device.</li>
+            <li>Clear step-by-step instructions for activation and setup.</li>
+            <li>Support via WhatsApp for common issues and questions.</li>
+            <li>Focus on user-friendliness and a stable experience.</li>
+          </ul>
+          <p class="lead small">
+            Note: The actual quality of your experience also depends on your
+            internet speed, connection stability and the devices you use.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- APPS / AROMA -->
+    <section class="reveal delay-2" style="margin-top:20px;">
+      <div class="cards">
+        <div class="card">
+          <h3>Recommended apps & compatibility</h3>
+          <p class="lead">
+            To use IPTV, you need a compatible app for your device
+            (Smart TV, TV box, smartphone, tablet or PC).
+            You can discover a selection of compatible apps here:
+          </p>
+          <a href="https://aroma-tv.show/apps" target="_blank" class="btn">
+            🌐 Browse IPTV apps (Aroma)
+          </a>
+          <p class="lead small" style="margin-top:8px;">
+            After installing the app, I help you enter your details and configure
+            everything correctly so it works smoothly.
+          </p>
+        </div>
+        <div class="card">
+          <h3>How I support you in practice</h3>
+          <p class="lead">
+            • Suggesting suitable apps for your system.<br>
+            • Explaining the first-time setup and activation.<br>
+            • Tips on how to navigate and use the interface.<br>
+            • Advice on how to avoid common issues as much as possible.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEPS + LEGAL -->
+    <section class="glass reveal delay-3" style="margin-top:24px;">
+      <div class="steps">
+        <div>
+          <h3>Quick request in 3 steps</h3>
+          <p class="lead">
+            Fill in the following fields and WhatsApp will open with a ready message
+            that you can send directly:
+          </p>
+          <div id="iptv-step-1">
+            <p class="lead"><b>1️⃣ Choose your main device:</b></p>
+            <select id="iptv-device" class="input">
+              <option>Android TV / TV Box</option>
+              <option>Smart TV</option>
+              <option>iPhone / iPad</option>
+              <option>Android smartphone / tablet</option>
+              <option>Windows / Mac</option>
+            </select>
+            <button class="btn" style="margin-top:10px;" onclick="nextIPTVStep(1)">Next</button>
+          </div>
+
+          <div id="iptv-step-2" style="display:none">
+            <p class="lead"><b>2️⃣ Choose duration:</b></p>
+            <select id="iptv-duration" class="input">
+              <option>12 months — 40€</option>
+              <option>24 months — 70€</option>
+            </select>
+            <button class="btn" style="margin-top:10px;" onclick="nextIPTVStep(2)">Next</button>
+          </div>
+
+          <div id="iptv-step-3" style="display:none">
+            <p class="lead"><b>3️⃣ Contact details:</b></p>
+            <input id="iptv-name" class="input" placeholder="Full name">
+            <input id="iptv-country" class="input" placeholder="Country / City">
+            <button class="btn" style="margin-top:10px;" onclick="nextIPTVStep(3)">
+              Send request via WhatsApp
+            </button>
+            <p class="lead small" style="margin-top:8px;">
+              WhatsApp will open with a message containing your details.
+              You can still edit or add anything before sending.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <h3>Legal notice</h3>
+          <div class="legal">
+            This service focuses solely on technical support, guidance and help
+            with setting up IPTV apps and access. Neither this website nor
+            Mohammad Alfarras host, store, sell or redistribute any TV channels,
+            movies or series. <br><br>
+            The way you use IPTV services is entirely your own responsibility.
+            You are responsible for complying with all applicable laws in your
+            country and with the terms of use of the apps and platforms you use. <br><br>
+            By requesting this service, you confirm that you are responsible for
+            how you use it, and that the role of Mohammad Alfarras is limited
+            to technical guidance and support only.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="glass">
+    <div class="container">
+      Designed with ❤️ by Mohammad Alfarras — moalfarras.space — © <span id="year"></span>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/004917623419358" class="chat-fab" aria-label="WhatsApp">💬</a>
+  <button id="top" title="Back to top">↑</button>
+
+  <script>
+    // Footer year
+    const yEl = document.getElementById('year');
+    if (yEl) yEl.textContent = new Date().getFullYear();
+
+    // Dark mode
+    const darkBtn = document.getElementById('dark');
+    if (darkBtn) {
+      const saved = localStorage.getItem('iptv-theme-en');
+      if (saved === 'dark') document.body.classList.add('dark');
+      darkBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark');
+        localStorage.setItem(
+          'iptv-theme-en',
+          document.body.classList.contains('dark') ? 'dark' : 'light'
+        );
+      });
+    }
+
+    // Scroll to top
+    const topBtn = document.getElementById('top');
+    window.addEventListener('scroll', () => {
+      topBtn.style.display = window.scrollY > 260 ? 'block' : 'none';
+    });
+    topBtn.addEventListener('click', () =>
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    );
+
+    // Steps → WhatsApp
+    function nextIPTVStep(step) {
+      const s1 = document.getElementById('iptv-step-1');
+      const s2 = document.getElementById('iptv-step-2');
+      const s3 = document.getElementById('iptv-step-3');
+      if (!s1 || !s2 || !s3) return;
+
+      if (step === 1) {
+        s1.style.display = 'none';
+        s2.style.display = 'block';
+      } else if (step === 2) {
+        s2.style.display = 'none';
+        s3.style.display = 'block';
+      } else if (step === 3) {
+        const device = document.getElementById('iptv-device')?.value || '';
+        const duration = document.getElementById('iptv-duration')?.value || '';
+        const name = document.getElementById('iptv-name')?.value || '';
+        const country = document.getElementById('iptv-country')?.value || '';
+
+        const msg = encodeURIComponent(
+          'IPTV Inquiry\\n' +
+          'Name: ' + name + '\\n' +
+          'Country / City: ' + country + '\\n' +
+          'Device: ' + device + '\\n' +
+          'Duration: ' + duration + '\\n'
+        );
+
+        window.open(
+          'https://wa.me/004917623419358?text=' + msg,
+          '_blank'
+        );
+      }
+    }
+    window.nextIPTVStep = nextIPTVStep;
+  </script>
+</body>
+</html>
