@@ -1,11 +1,10 @@
 <!doctype html>
-<html lang="ar" dir="rtl">
+<html lang="de" dir="ltr">
 <head>
   <meta charset="utf-8">
-  <title>خدمة المشاهدة الرقمية IPTV | محمد الفراس</title>
+  <title>IPTV Stream Experience | Mohammad Alfarras</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- ألوان وثيم زجاجي -->
   <style>
     :root {
       --bg: #020617;
@@ -35,7 +34,6 @@
       background: radial-gradient(circle at top, #020617 0, #000 55%, #020617 100%);
     }
 
-    /* خلفية شفق سماوي */
     .aurora {
       position: fixed;
       inset: 0;
@@ -237,14 +235,17 @@
     .card h3 { font-size:17px; }
 
     .bullet {
-      padding-right:18px;
-      list-style:none;
+      padding-left:18px;
+    }
+    .bullet li {
+      margin-bottom:6px;
+      list-style: none;
     }
     .bullet li::before {
       content:"• ";
       color:var(--accent-2);
+      margin-right:4px;
     }
-    .bullet li { margin-bottom:6px; }
 
     .steps {
       display:grid;
@@ -268,8 +269,8 @@
       font-size:11px;
       line-height:1.8;
       color:var(--text-soft);
-      border-right:3px solid rgba(248,250,252,0.35);
-      padding-right:10px;
+      border-left:3px solid rgba(248,250,252,0.35);
+      padding-left:10px;
       margin-top:10px;
     }
 
@@ -279,28 +280,6 @@
       font-size:12px;
       text-align:center;
       color:var(--text-soft);
-    }
-
-    /* حركات */
-    .reveal {
-      opacity:0;
-      transform:translateY(18px);
-      animation: fadeUp 0.8s ease forwards;
-    }
-    .reveal.delay-1 { animation-delay: 0.15s; }
-    .reveal.delay-2 { animation-delay: 0.3s; }
-    .reveal.delay-3 { animation-delay: 0.45s; }
-
-    @keyframes fadeUp {
-      to {
-        opacity:1;
-        transform:translateY(0);
-      }
-    }
-    @keyframes floatLogo {
-      0%{transform:translateY(0);}
-      50%{transform:translateY(-4px);}
-      100%{transform:translateY(0);}
     }
 
     .chat-fab {
@@ -338,6 +317,27 @@
       z-index:35;
     }
 
+    .reveal {
+      opacity:0;
+      transform:translateY(18px);
+      animation: fadeUp 0.8s ease forwards;
+    }
+    .reveal.delay-1 { animation-delay: 0.15s; }
+    .reveal.delay-2 { animation-delay: 0.3s; }
+    .reveal.delay-3 { animation-delay: 0.45s; }
+
+    @keyframes fadeUp {
+      to {
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+    @keyframes floatLogo {
+      0%{transform:translateY(0);}
+      50%{transform:translateY(-4px);}
+      100%{transform:translateY(0);}
+    }
+
     @media (max-width: 768px){
       .navbar { gap:8px; }
       .brand-text b { font-size:14px; }
@@ -354,17 +354,15 @@
   </style>
 </head>
 <body>
-  <!-- شفق سماوي -->
+  <!-- Aurora -->
   <div class="aurora">
     <span></span><span></span><span></span><span></span>
   </div>
 
-  <!-- شريط علوي -->
   <div class="top-bar">
-    خدمة مشاهدة رقمية مرنة — اشتراك سنة 40€ أو سنتين 70€ مع دعم شخصي وخطوات واضحة.
+    Flexible IPTV-Erfahrung – 1 Jahr für 40€ oder 2 Jahre für 70€ mit persönlicher Unterstützung.
   </div>
 
-  <!-- هيدر -->
   <header class="glass">
     <div class="container navbar">
       <a href="#" class="brand">
@@ -375,158 +373,169 @@
         </div>
       </a>
       <div class="actions">
-        <button id="dark" class="icon-btn" aria-label="الوضع الداكن">🌙</button>
+        <button id="dark" class="icon-btn" aria-label="Dark mode">🌙</button>
       </div>
     </div>
   </header>
 
   <main class="container">
 
-    <!-- هيرو -->
+    <!-- HERO -->
     <section class="glass hero reveal">
       <div>
-        <span class="badge">خدمة المشاهدة الرقمية IPTV Stream Experience</span>
-        <h1>شاهد محتواك المفضل بأسلوب بسيط، واضح… ومع دعم شخصي من أول لحظة.</h1>
+        <span class="badge">IPTV Stream Experience</span>
+        <h1>Dein IPTV-Erlebnis – einfach, transparent und mit persönlicher Begleitung.</h1>
         <p class="lead">
-          خدمة IPTV التي أقدّمها ليست مجرد اشتراك عادي، بل تجربة كاملة أساعدك فيها على اختيار التطبيق المناسب،
-          الإعداد الصحيح، وحل المشاكل خطوة بخطوة. كل شيء يبدأ من فهم جهازك، وسرعة اتصالك، وما يناسب نمط حياتك.
+          Mein IPTV-Service ist mehr als nur ein Zugang – es ist eine Begleitung.
+          Ich helfe dir dabei, die passenden Apps auszuwählen, alles richtig einzurichten
+          und typische Fehler zu vermeiden. Schritt für Schritt, angepasst an dein Gerät
+          und deine Internetverbindung.
         </p>
         <p class="lead">
-          سواء كنت تحب متابعة المباريات، المسلسلات، أو المحتوى الترفيهي العائلي، نحاول أن نجعل التجربة قدر المستطاع
-          مستقرة، مرتبة، وسهلة الاستخدام، مع شرح واضح من دون مصطلحات معقدة.
+          Egal, ob du gerne Sport, Serien oder Familienunterhaltung schaust:
+          Ziel ist eine möglichst stabile und angenehme Nutzung – ohne komplizierte
+          Technikbegriffe, sondern mit klaren Erklärungen.
         </p>
         <div class="quick">
-          <a href="https://wa.me/004917623419358?text=IPTV%20Inquiry" target="_blank" class="btn">
-            💬 اسألني عن الاشتراك الآن
+          <a href="https://wa.me/004917623419358?text=IPTV%20Anfrage" target="_blank" class="btn">
+            💬 IPTV-Anfrage über WhatsApp
           </a>
           <a href="https://www.paypal.me/moalfarras" target="_blank" class="btn secondary">
-            💳 الدفع عبر PayPal
+            💳 Bezahlung über PayPal
           </a>
         </div>
       </div>
       <div class="hero-media">
         <div class="hero-card">
-          <!-- عدّل مسار الصورة حسب مجلداتك -->
           <img src="assets/img/iptv-main.jpg" alt="IPTV" />
           <p class="lead small">
-            إعداد تقني، تهيئة تطبيقات، ومتابعة بعد الاشتراك — من دون استضافة أو توزيع محتوى محمي.
+            Technische Einrichtung und Unterstützung – ohne Hosten oder Verteilen von urheberrechtlich geschütztem Inhalt.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- الباقات والمميزات -->
+    <!-- PLÄNE & FEATURES -->
     <section class="reveal delay-1" style="margin-top:20px;">
       <div class="cards">
         <div class="card">
-          <h3>الباقات المتوفّرة</h3>
+          <h3>Verfügbare Laufzeiten</h3>
           <p class="lead">
-            الأسعار التالية تشمل الخدمة التقنية، المتابعة، والإرشاد حسب جهازك واحتياجك:
+            Die folgenden Preise beinhalten technische Unterstützung, Einrichtung
+            und persönliche Begleitung:
           </p>
           <ul class="bullet lead">
-            <li><b>اشتراك سنة كاملة:</b> 40€</li>
-            <li><b>اشتراك سنتين:</b> 70€</li>
+            <li><b>12 Monate:</b> 40€</li>
+            <li><b>24 Monate:</b> 70€</li>
           </ul>
           <p class="lead">
-            بعد الدفع عبر PayPal، كل ما عليك هو التواصل معي على واتساب لإتمام الإعداد وربط الخدمة بأجهزتك.
+            Nach der PayPal-Zahlung kannst du mich einfach über WhatsApp kontaktieren,
+            damit wir gemeinsam die Einrichtung auf deinen Geräten abschließen.
           </p>
         </div>
         <div class="card">
-          <h3>مميزات الخدمة</h3>
+          <h3>Vorteile des Service</h3>
           <ul class="bullet lead">
-            <li>توجيه شخصي لاختيار أفضل تطبيقات المشاهدة المناسبة لجهازك.</li>
-            <li>شرح مبسط خطوة بخطوة حتى يعمل كل شيء بشكل صحيح.</li>
-            <li>دعم فني عبر واتساب في حال وجود أسئلة أو مشاكل.</li>
-            <li>تركيز على الاستقرار وسهولة الاستخدام قدر الإمكان.</li>
+            <li>Persönliche Empfehlung für passende Apps je nach Gerät.</li>
+            <li>Klare Schritt-für-Schritt-Anleitung zur Aktivierung.</li>
+            <li>Unterstützung bei häufigen Fragen und Problemen über WhatsApp.</li>
+            <li>Fokus auf Nutzerfreundlichkeit und möglichst stabile Nutzung.</li>
           </ul>
           <p class="lead small">
-            ملاحظة: جودة التجربة تعتمد أيضًا على سرعة واستقرار اتصال الإنترنت لديك، ونوع جهازك المستخدم.
+            Hinweis: Die tatsächliche Qualität hängt auch von deiner Internetgeschwindigkeit,
+            der Stabilität deiner Verbindung und deinem Gerät ab.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- التطبيقات المدعومة + aroma-tv -->
+    <!-- APPS / AROMA -->
     <section class="reveal delay-2" style="margin-top:20px;">
       <div class="cards">
         <div class="card">
-          <h3>تطبيقات المشاهدة الموصى بها</h3>
+          <h3>Empfohlene Apps & Kompatibilität</h3>
           <p class="lead">
-            لاستخدام الخدمة تحتاج لتطبيق مناسب لجهازك (تلفزيون ذكي، TV Box، جوال، تابلت، أو كمبيوتر).
-            من الرابط التالي يمكنك استعراض مجموعة من التطبيقات المتوافقة مع أجهزة مختلفة:
+            Für die Nutzung benötigst du eine geeignete App für dein Gerät
+            (Smart TV, TV Box, Smartphone, Tablet oder PC).
+            Unter folgendem Link findest du eine Übersicht kompatibler Apps:
           </p>
           <a href="https://aroma-tv.show/apps" target="_blank" class="btn">
-            🌐 استعراض تطبيقات المشاهدة (Aroma Apps)
+            🌐 Aroma TV – App-Übersicht
           </a>
           <p class="lead small" style="margin-top:8px;">
-            بعد تثبيت التطبيق، أساعدك على إدخال البيانات اللازمة وربط الخدمة بطريقة آمنة وواضحة.
+            Nach der Installation unterstütze ich dich bei der Eingabe deiner Daten
+            und der richtigen Konfiguration, damit alles sauber läuft.
           </p>
         </div>
         <div class="card">
-          <h3>كيف أساعدك عمليًا؟</h3>
+          <h3>Wie ich dich konkret unterstütze</h3>
           <p class="lead">
-            • اقتراح التطبيق الأنسب لجهازك ونظامك.<br>
-            • توضيح خطوات التفعيل والإعداد الأول.<br>
-            • شرح مبسط لكيفية التنقل واستخدام القوائم.<br>
-            • نصائح للحفاظ على استقرار التجربة قدر الإمكان.
+            • Auswahl einer geeigneten App für dein System.<br>
+            • Erklärung der ersten Einrichtung und Aktivierung.<br>
+            • Tipps zur Bedienung und zum sicheren Umgang.<br>
+            • Hinweise, wie du Störungen möglichst vermeiden kannst.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- خطوات الاشتراك التفاعلية -->
+    <!-- SCHRITTE + RECHTLICHES -->
     <section class="glass reveal delay-3" style="margin-top:24px;">
       <div class="steps">
         <div>
-          <h3>خطوات الاشتراك السريع</h3>
+          <h3>Schnelle Anfrage in 3 Schritten</h3>
           <p class="lead">
-            املأ المعلومات التالية بخطوات بسيطة، وسوف يتم فتح واتساب مع رسالة جاهزة يمكنك إرسالها مباشرة:
+            Fülle die folgenden Felder aus, danach öffnet sich WhatsApp mit einer fertigen Nachricht,
+            die du nur noch senden musst:
           </p>
           <div id="iptv-step-1">
-            <p class="lead"><b>1️⃣ نوع جهازك الرئيسي:</b></p>
+            <p class="lead"><b>1️⃣ Hauptgerät auswählen:</b></p>
             <select id="iptv-device" class="input">
               <option>Android TV / TV Box</option>
               <option>Smart TV</option>
               <option>iPhone / iPad</option>
-              <option>هاتف أو تابلت بنظام Android</option>
+              <option>Android Smartphone / Tablet</option>
               <option>Windows / Mac</option>
             </select>
-            <button class="btn" style="margin-top:10px;" onclick="nextIPTVStep(1)">التالي</button>
+            <button class="btn" style="margin-top:10px;" onclick="nextIPTVStep(1)">Weiter</button>
           </div>
 
           <div id="iptv-step-2" style="display:none">
-            <p class="lead"><b>2️⃣ مدة الاشتراك:</b></p>
+            <p class="lead"><b>2️⃣ Laufzeit wählen:</b></p>
             <select id="iptv-duration" class="input">
-              <option>اشتراك سنة — 40€</option>
-              <option>اشتراك سنتين — 70€</option>
+              <option>12 Monate — 40€</option>
+              <option>24 Monate — 70€</option>
             </select>
-            <button class="btn" style="margin-top:10px;" onclick="nextIPTVStep(2)">التالي</button>
+            <button class="btn" style="margin-top:10px;" onclick="nextIPTVStep(2)">Weiter</button>
           </div>
 
           <div id="iptv-step-3" style="display:none">
-            <p class="lead"><b>3️⃣ بيانات التواصل:</b></p>
-            <input id="iptv-name" class="input" placeholder="الاسم الكامل">
-            <input id="iptv-country" class="input" placeholder="الدولة / المدينة">
+            <p class="lead"><b>3️⃣ Kontaktdaten:</b></p>
+            <input id="iptv-name" class="input" placeholder="Vollständiger Name">
+            <input id="iptv-country" class="input" placeholder="Land / Stadt">
             <button class="btn" style="margin-top:10px;" onclick="nextIPTVStep(3)">
-              إرسال الطلب على واتساب
+              Anfrage über WhatsApp senden
             </button>
             <p class="lead small" style="margin-top:8px;">
-              سيُفتح واتساب مع رسالة تحتوي على البيانات التي أدخلتها، ويمكنك إضافة أي ملاحظات إضافية قبل الإرسال.
+              Es öffnet sich WhatsApp mit einer Nachricht, die deine Angaben enthält.
+              Du kannst den Text vor dem Senden noch anpassen oder ergänzen.
             </p>
           </div>
         </div>
 
         <div>
-          <h3>نص قانوني مهم</h3>
+          <h3>Rechtlicher Hinweis</h3>
           <div class="legal">
-            هذه الخدمة تركز على الإعداد التقني، الدعم، وتسهيل تجربة المشاهدة عبر الإنترنت فقط.
-            لا يتم عبر هذا الموقع أو عبر محمد الفراس استضافة أو تخزين أو بيع أو إعادة توزيع
-            أي محتوى تلفزيوني أو سينمائي محمي بحقوق نشر. <br><br>
-            استخدام أي بيانات أو اشتراك يتم تحت مسؤولية المستخدم الكاملة، مع ضرورة
-            التقيّد بالقوانين المحلية في بلد الإقامة، وبشروط استخدام التطبيقات والمنصات
-            التي يتم تشغيلها على أجهزتك. <br><br>
-            من خلال طلبك للخدمة، فإنك تقرّ بأنك مسؤول عن طريقة استخدامك لها، وأن دور
-            محمد الفراس يقتصر على الدعم التقني والإرشاد فقط.
+            Dieser Service konzentriert sich ausschließlich auf technische Unterstützung,
+            Beratung und Hilfe bei der Einrichtung von IPTV-Apps und -Zugängen.
+            Über diese Webseite oder über Mohammad Alfarras werden <b>keine</b> TV-Sender,
+            Filme oder Serien gehostet, gespeichert, verkauft oder weiterverteilt. <br><br>
+            Die Nutzung von IPTV-Diensten erfolgt in deiner eigenen Verantwortung.
+            Du bist selbst dafür verantwortlich, alle geltenden Gesetze in deinem Land
+            sowie die Nutzungsbedingungen der verwendeten Apps und Plattformen einzuhalten. <br><br>
+            Mit deiner Anfrage bestätigst du, dass du für die Art und Weise der Nutzung
+            selbst verantwortlich bist und dass die Rolle von Mohammad Alfarras
+            sich auf technische Unterstützung und Beratung beschränkt.
           </div>
         </div>
       </div>
@@ -535,34 +544,33 @@
 
   <footer class="glass">
     <div class="container">
-      صُمم بكل ❤️ بواسطة محمد الفراس — moalfarras.space — © <span id="year"></span>
+      Mit ❤️ gestaltet von Mohammad Alfarras — moalfarras.space — © <span id="year"></span>
     </div>
   </footer>
 
   <a href="https://wa.me/004917623419358" class="chat-fab" aria-label="WhatsApp">💬</a>
-  <button id="top" title="إلى الأعلى">↑</button>
+  <button id="top" title="Nach oben">↑</button>
 
-  <!-- سكربت الحركات والدارك + خطوات الواتساب -->
   <script>
-    // سنة الفوتر
+    // Jahr im Footer
     const yEl = document.getElementById('year');
     if (yEl) yEl.textContent = new Date().getFullYear();
 
-    // دارك مود
+    // Dark Mode
     const darkBtn = document.getElementById('dark');
     if (darkBtn) {
-      const saved = localStorage.getItem('iptv-theme');
+      const saved = localStorage.getItem('iptv-theme-de');
       if (saved === 'dark') document.body.classList.add('dark');
       darkBtn.addEventListener('click', () => {
         document.body.classList.toggle('dark');
         localStorage.setItem(
-          'iptv-theme',
+          'iptv-theme-de',
           document.body.classList.contains('dark') ? 'dark' : 'light'
         );
       });
     }
 
-    // زر للأعلى
+    // Scroll nach oben
     const topBtn = document.getElementById('top');
     window.addEventListener('scroll', () => {
       topBtn.style.display = window.scrollY > 260 ? 'block' : 'none';
@@ -571,7 +579,7 @@
       window.scrollTo({ top: 0, behavior: 'smooth' })
     );
 
-    // خطوات IPTV → واتساب
+    // Schritte → WhatsApp
     function nextIPTVStep(step) {
       const s1 = document.getElementById('iptv-step-1');
       const s2 = document.getElementById('iptv-step-2');
@@ -591,11 +599,11 @@
         const country = document.getElementById('iptv-country')?.value || '';
 
         const msg = encodeURIComponent(
-          'IPTV Anfrage / طلب IPTV\\n' +
+          'IPTV Anfrage\\n' +
           'Name: ' + name + '\\n' +
-          'Land / Country: ' + country + '\\n' +
+          'Land / Stadt: ' + country + '\\n' +
           'Gerät / Device: ' + device + '\\n' +
-          'Dauer / Duration: ' + duration + '\\n'
+          'Laufzeit: ' + duration + '\\n'
         );
 
         window.open(
