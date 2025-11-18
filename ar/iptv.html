@@ -5,23 +5,474 @@
   <title>خدمة المشاهدة الرقمية IPTV | محمد الفراس</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="خدمة مشاهدة رقمية مع دعم شخصي من محمد الفراس: اختيار التطبيقات، شرح الإعداد، ودعم عبر واتساب مع دفع آمن عبر PayPal." />
-  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <style>
+    :root{
+      --bg:#020617;
+      --accent:#22d3ee;
+      --accent2:#38bdf8;
+      --accent-soft:rgba(56,189,248,.25);
+      --glass:rgba(15,23,42,.9);
+      --border:rgba(148,163,184,.45);
+      --text:#e5e7eb;
+      --text-soft:#cbd5f5;
+      --radius:22px;
+      --shadow:0 20px 50px rgba(15,23,42,.95);
+    }
+
+    *,*::before,*::after{box-sizing:border-box;}
+
+    html,body{
+      margin:0;
+      padding:0;
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:radial-gradient(circle at top,#0b1220 0,#020617 55%,#000 100%);
+      color:var(--text);
+      min-height:100vh;
+      scroll-behavior:smooth;
+    }
+    body.dark{background:#020617;}
+
+    /* نجوم للوضع الداكن */
+    .stars{
+      position:fixed;inset:0;pointer-events:none;z-index:-2;opacity:0;
+      transition:opacity .5s ease;
+      background-image:
+        radial-gradient(2px 2px at 10% 20%,rgba(255,255,255,.8) 0,transparent 40%),
+        radial-gradient(1.5px 1.5px at 80% 10%,rgba(255,255,255,.6) 0,transparent 40%),
+        radial-gradient(1.5px 1.5px at 30% 80%,rgba(255,255,255,.7) 0,transparent 40%),
+        radial-gradient(2px 2px at 70% 60%,rgba(255,255,255,.9) 0,transparent 40%);
+      background-repeat:repeat;
+      animation:stars-move 40s linear infinite;
+    }
+    body.dark .stars{opacity:1;}
+
+    @keyframes stars-move{
+      0%{background-position:0 0,0 0,0 0,0 0;}
+      100%{background-position:200px 400px,-200px 200px,-150px -300px,150px -200px;}
+    }
+
+    /* شفق سماوي */
+    .aurora{
+      position:fixed;inset:0;pointer-events:none;z-index:-3;
+    }
+    .aurora span{
+      position:absolute;width:420px;height:420px;border-radius:999px;
+      filter:blur(80px);opacity:.7;mix-blend-mode:screen;
+    }
+    .aurora span:nth-child(1){background:#22d3ee;top:-80px;left:-60px;}
+    .aurora span:nth-child(2){background:#38bdf8;top:40%;right:-140px;}
+    .aurora span:nth-child(3){background:#a855f7;bottom:-160px;left:10%;}
+    .aurora span:nth-child(4){background:#f97316;top:5%;right:30%;}
+
+    .container{
+      width:100%;
+      max-width:1120px;
+      margin:0 auto;
+      padding:0 16px;
+    }
+
+    .top-bar{
+      text-align:center;
+      padding:6px 10px;
+      font-size:12px;
+      color:var(--text-soft);
+      background:linear-gradient(90deg,rgba(34,211,238,.25),rgba(59,130,246,.18));
+      border-bottom:1px solid var(--border);
+    }
+
+    header.glass{
+      position:sticky;
+      top:0;
+      z-index:40;
+      backdrop-filter:blur(22px);
+      background:linear-gradient(120deg,rgba(15,23,42,.96),rgba(15,23,42,.82));
+      border-bottom:1px solid var(--border);
+    }
+
+    .navbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      min-height:64px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      color:var(--text);
+    }
+
+    .brand-logo{
+      width:46px;
+      height:46px;
+      border-radius:18px;
+      overflow:hidden;
+      background:radial-gradient(circle at top,#22d3ee,#0f172a);
+      box-shadow:0 0 20px rgba(34,211,238,.8);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      animation:floatLogo 4s ease-in-out infinite;
+    }
+    .brand-logo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:inherit;
+    }
+
+    .brand-text b{display:block;font-size:15px;}
+    .brand-text span{display:block;font-size:11px;opacity:.8;}
+
+    .actions{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    .lang-switch{
+      display:flex;
+      align-items:center;
+      gap:4px;
+      font-size:11px;
+    }
+    .lang-switch a{
+      padding:3px 8px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      text-decoration:none;
+      color:var(--text-soft);
+      background:rgba(15,23,42,.9);
+    }
+    .lang-switch a.active{
+      border-color:var(--accent);
+      color:var(--text);
+      box-shadow:0 0 12px rgba(34,211,238,.6);
+      background:radial-gradient(circle at top,rgba(34,211,238,.35),rgba(15,23,42,1));
+    }
+
+    .icon-btn{
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(15,23,42,.9);
+      color:var(--text-soft);
+      padding:6px 9px;
+      cursor:pointer;
+      font-size:16px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .icon-btn:hover{
+      border-color:var(--accent);
+      box-shadow:0 0 14px rgba(34,211,238,.6);
+    }
+
+    .nav-links{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:10px;
+      margin:8px auto 10px;
+    }
+    .nav-links a{
+      padding:6px 14px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(15,23,42,.9);
+      color:var(--text-soft);
+      font-size:13px;
+      text-decoration:none;
+      transition:all .2s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active{
+      border-color:var(--accent);
+      background:radial-gradient(circle at top,rgba(34,211,238,.25),rgba(59,130,246,.22));
+      color:var(--text);
+      box-shadow:0 0 18px rgba(34,211,238,.6);
+    }
+
+    main{padding:22px 0 70px;}
+    .section{margin:20px 0;}
+
+    .glass-card{
+      border-radius:var(--radius);
+      background:
+        radial-gradient(circle at top left,rgba(34,211,238,.16),transparent 55%),
+        radial-gradient(circle at bottom right,rgba(59,130,246,.2),transparent 55%),
+        var(--glass);
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+      padding:20px 18px 24px;
+    }
+
+    .hero{
+      display:grid;
+      grid-template-columns:minmax(0,3fr) minmax(0,2.2fr);
+      gap:22px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:3px 10px;
+      border-radius:999px;
+      border:1px solid rgba(94,234,212,.6);
+      background:radial-gradient(circle at top,rgba(34,211,238,.35),transparent 60%);
+      font-size:12px;
+      color:var(--text-soft);
+      margin-bottom:6px;
+      animation:glow 3s ease-in-out infinite;
+    }
+
+    h1,h2,h3{margin:8px 0;}
+    h1{font-size:clamp(24px,4vw,30px);}
+    h2{font-size:clamp(18px,3vw,22px);}
+
+    .lead{
+      font-size:14px;
+      line-height:1.9;
+      color:var(--text-soft);
+      animation:fadeUp .7s ease forwards;
+    }
+    .lead.small{
+      font-size:12px;
+    }
+
+    .hero-media{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .hero-portrait{
+      width:220px;
+      height:220px;
+      border-radius:999px;
+      border:2px solid rgba(148,163,184,.65);
+      padding:4px;
+      background:radial-gradient(circle at top,#22d3ee,#0f172a);
+      box-shadow:0 18px 42px rgba(0,0,0,.85);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-portrait img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:inherit;
+    }
+    .hero-portrait-badge{
+      position:absolute;
+      bottom:10px;
+      left:50%;
+      transform:translateX(-50%);
+      display:flex;
+      align-items:center;
+      gap:6px;
+      padding:3px 10px;
+      border-radius:999px;
+      background:rgba(15,23,42,.92);
+      border:1px solid rgba(148,163,184,.8);
+      font-size:11px;
+      color:var(--text-soft);
+    }
+    .hero-portrait-badge img{
+      width:18px;
+      height:18px;
+      border-radius:6px;
+      object-fit:cover;
+    }
+
+    .quick{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      padding:8px 18px;
+      border-radius:999px;
+      border:1px solid rgba(56,189,248,.9);
+      background:linear-gradient(120deg,#06b6d4,#3b82f6);
+      color:#020617;
+      font-size:13px;
+      text-decoration:none;
+      cursor:pointer;
+      box-shadow:0 14px 36px rgba(15,23,42,1);
+      white-space:nowrap;
+    }
+    .btn.secondary{
+      background:rgba(15,23,42,.96);
+      color:var(--text-soft);
+      border-color:var(--border);
+      box-shadow:none;
+    }
+    .btn:hover{
+      filter:brightness(1.08);
+      box-shadow:0 16px 40px rgba(15,23,42,1);
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:18px;
+      margin-top:10px;
+    }
+
+    .bullet{padding-inline-start:18px;}
+    .bullet li{margin-bottom:6px;}
+
+    .input, select.input{
+      width:100%;
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:rgba(15,23,42,.9);
+      color:var(--text);
+      margin-top:6px;
+      font-size:13px;
+    }
+
+    footer.glass{
+      margin-top:32px;
+      padding:10px 0;
+      font-size:12px;
+      color:var(--text-soft);
+      text-align:center;
+      backdrop-filter:blur(18px);
+      background:rgba(15,23,42,.96);
+      border-top:1px solid var(--border);
+    }
+
+    .chat-fab{
+      position:fixed;
+      bottom:18px;
+      right:18px;
+      width:44px;
+      height:44px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:none;
+      background:radial-gradient(circle at top,#22c55e,#16a34a);
+      color:#f9fafb;
+      text-decoration:none;
+      font-size:22px;
+      box-shadow:0 14px 30px rgba(22,163,74,0.7);
+      z-index:35;
+    }
+
+    #top{
+      position:fixed;
+      bottom:18px;
+      left:18px;
+      width:32px;
+      height:32px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(15,23,42,.96);
+      color:var(--text-soft);
+      cursor:pointer;
+      font-size:16px;
+      display:none;
+      z-index:35;
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(16px);
+      transition:opacity .6s ease, transform .6s ease;
+    }
+    .reveal.visible{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    /* مؤشر ماوس متوهج */
+    .cursor-glow{
+      position:fixed;
+      width:18px;
+      height:18px;
+      border-radius:999px;
+      border:1px solid rgba(56,189,248,.8);
+      box-shadow:0 0 18px rgba(34,211,238,.7);
+      pointer-events:none;
+      z-index:30;
+      transform:translate(-50%,-50%);
+      transition:transform .09s ease-out;
+    }
+
+    @keyframes floatLogo{
+      0%{transform:translateY(0);}
+      50%{transform:translateY(-3px);}
+      100%{transform:translateY(0);}
+    }
+
+    @keyframes glow{
+      0%,100%{box-shadow:0 0 10px rgba(34,211,238,.2);}
+      50%{box-shadow:0 0 20px rgba(34,211,238,.6);}
+    }
+
+    @keyframes fadeUp{
+      0%{opacity:0;transform:translateY(12px);}
+      100%{opacity:1;transform:translateY(0);}
+    }
+
+    @media (max-width:768px){
+      .navbar{gap:8px;}
+      .brand-text b{font-size:14px;}
+      .hero{grid-template-columns:minmax(0,1fr);}
+      .hero-media{order:-1;margin-bottom:8px;}
+    }
+    @media (max-width:480px){
+      .container{padding:0 10px;}
+      .hero-portrait{width:180px;height:180px;}
+      .nav-links{gap:6px;}
+      .nav-links a{padding:5px 11px;font-size:11px;}
+      .quick{flex-direction:column;align-items:stretch;}
+      .btn{width:100%;justify-content:center;}
+      .cards{gap:12px;}
+    }
+  </style>
 </head>
 <body>
+  <!-- خلفية نجوم + شفق -->
   <div class="stars"></div>
   <div class="aurora">
     <span></span><span></span><span></span><span></span>
   </div>
 
+  <!-- مؤشر ماوس متوهج -->
+  <div class="cursor-glow"></div>
+
+  <!-- شريط أعلى -->
   <div class="top-bar">
     خدمة مشاهدة رقمية مع دعم شخصي من محمد الفراس — شرح بسيط، خيارات واضحة، وتجربة مريحة لكل أجهزتك.
   </div>
 
+  <!-- الهيدر -->
   <header class="glass">
     <div class="container navbar">
       <a href="index.html" class="brand">
         <div class="brand-logo">
-          <img src="../assets/img/logo.png" alt="شعار Mohammad Alfarras">
+          <!-- عدّل مسار الشعار إذا لزم -->
+          <img src="../logo.png" alt="شعار Mohammad Alfarras">
         </div>
         <div class="brand-text">
           <b>Mohammad Alfarras</b>
@@ -29,6 +480,11 @@
         </div>
       </a>
       <div class="actions">
+        <div class="lang-switch">
+          <a href="iptv.html" class="active">AR</a>
+          <a href="../en/iptv.html">EN</a>
+          <a href="../de/iptv.html">DE</a>
+        </div>
         <button id="dark-toggle" class="icon-btn" aria-label="Dark mode">🌙</button>
       </div>
     </div>
@@ -45,13 +501,14 @@
   </header>
 
   <main class="container">
+    <!-- هيرو -->
     <section class="section glass-card hero reveal">
       <div>
         <span class="badge">IPTV مدعوم بدعم شخصي وشرح بسيط</span>
-        <h1>حوّل الحيرة إلى قرار واثق… ونخلّي المشاهدة على كل أجهزتك أخف وأمتع.</h1>
+        <h1>خلي المشاهدة الرقمية أذكى وأسهل… ونخلّي التقنية تشتغل لخدمتك، مو تتعبك.</h1>
         <p class="lead">
           من أول رسالة على واتساب، أساعدك تختار التطبيق المناسب لجهازك، وأشرح لك خطوة بخطوة
-          كيف تفعّل الخدمة بدون تعقيد. الهدف أن تستمتع بالتقنية، لا أن تتعب في إعدادها.
+          كيف تفعّل الخدمة بدون تعقيد. الفكرة بسيطة: <b>أنت تستمتع بالمحتوى، وأنا أرتّب لك الطريق.</b>
         </p>
         <p class="lead">
           تختار العرض، تدفع بأمان عبر PayPal، ترسل لي تفاصيل جهازك… وأنا أرافقك
@@ -66,15 +523,17 @@
 
       <div class="hero-media">
         <div class="hero-portrait">
-          <img src="../assets/img/portrait-main.jpg" alt="Mohammad Alfarras">
+          <!-- عدّل مسار الصورة إذا مختلف عندك -->
+          <img src="../portrait.jpeg" alt="Mohammad Alfarras">
           <div class="hero-portrait-badge">
-            <img src="../assets/img/iptv-icon.jpg" alt="IPTV Icon">
+            <img src="../iptv-icon.jpg" alt="IPTV Icon">
             <span>دعم IPTV مع محمد</span>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- العروض -->
     <section id="plans" class="section glass-card reveal">
       <h2>العروض المتاحة</h2>
       <div class="cards">
@@ -115,6 +574,7 @@
       </div>
     </section>
 
+    <!-- الأجهزة والتطبيقات -->
     <section class="section glass-card reveal">
       <h2>على أي أجهزة تعمل الخدمة؟</h2>
       <div class="cards">
@@ -144,6 +604,7 @@
       </div>
     </section>
 
+    <!-- نموذج طلب -->
     <section id="request" class="section glass-card reveal">
       <h2>طلب اشتراك بخطوات بسيطة</h2>
       <div class="cards">
@@ -179,6 +640,7 @@
           </button>
         </div>
 
+        <!-- نص قانوني -->
         <div>
           <h3>ملاحظة قانونية مهمة</h3>
           <p class="lead small">
@@ -206,11 +668,67 @@
     </div>
   </footer>
 
+  <!-- واتساب عائم -->
   <a href="https://wa.me/004917623419358" class="chat-fab" aria-label="WhatsApp">💬</a>
+
+  <!-- زر الصعود للأعلى -->
   <button id="top" title="إلى الأعلى">↑</button>
 
-  <script src="../assets/js/main.js"></script>
   <script>
+    // Dark mode
+    (function(){
+      var btn = document.getElementById("dark-toggle");
+      var body = document.body;
+      var saved = localStorage.getItem("theme");
+      if(saved === "dark"){ body.classList.add("dark"); }
+      if(btn){
+        btn.addEventListener("click", function(){
+          body.classList.toggle("dark");
+          localStorage.setItem("theme",
+            body.classList.contains("dark") ? "dark" : "light"
+          );
+        });
+      }
+    })();
+
+    // Scroll to top
+    (function(){
+      var topBtn = document.getElementById("top");
+      window.addEventListener("scroll", function(){
+        topBtn.style.display = window.scrollY > 260 ? "block" : "none";
+      });
+      topBtn.addEventListener("click", function(){
+        window.scrollTo({top:0,behavior:"smooth"});
+      });
+    })();
+
+    // Reveal on scroll
+    (function(){
+      var els = document.querySelectorAll(".reveal");
+      if(!("IntersectionObserver" in window)){
+        els.forEach(function(el){ el.classList.add("visible"); });
+        return;
+      }
+      var obs = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            entry.target.classList.add("visible");
+          }
+        });
+      },{threshold:0.18});
+      els.forEach(function(el){ obs.observe(el); });
+    })();
+
+    // مؤشر الماوس المتوهج
+    (function(){
+      var cg = document.querySelector(".cursor-glow");
+      if(!cg) return;
+      window.addEventListener("mousemove", function(e){
+        cg.style.transform = "translate(" + e.clientX + "px," + e.clientY + "px)";
+      });
+    })();
+
+    // إرسال طلب IPTV عبر واتساب
     function sendIPTVRequest(){
       var device  = document.getElementById("iptv-device").value;
       var duration= document.getElementById("iptv-duration").value;
